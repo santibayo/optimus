@@ -1,5 +1,5 @@
-import es.boalis.utils.transformer.Flow
+import es.boalis.utils.transformer.FlowDelete
 
-flow = new Flow()
+flow = new FlowDelete()
 config = {}
 config["file.name"]= ''

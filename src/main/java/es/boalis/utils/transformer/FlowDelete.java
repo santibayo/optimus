@@ -1,26 +1,19 @@
 package es.boalis.utils.transformer;
 
-import java.util.Iterator;
+import java.io.IOException;
 import java.util.Map;
 
-public class FlowIterator {
-
+public class Flow{
     private Channel inbound;
     private Channel outbound;
-    private ChunkReader r;
-    private ChunkWriter w;
-    private Transformer transformer;
-
-    public FlowIterator(Channel inbound,Channel outbound,ChunkReader r,
-                        ChunkWriter w, Transformer transformer){
+    public Flow(Channel inbound, Channel outbound){
         this.inbound = inbound;
-        this.outbound = outbound;
-        this.r = r;
-        this.w = w;
-        this.transformer = transformer;
+        this.outbound =outbound;
     }
+    public void init (Map<String,String> config)throws IOException{
 
-    public boolean hasNext() throws Exception{
+    }
+    public boolean processChunk( ChunkReader r, ChunkWriter w, Transformer transformer)throws IOException{
         ChunkData readData = inbound.readData();
         if (readData.getChunk()==null){
             return false;
@@ -34,9 +27,13 @@ public class FlowIterator {
         outbound.writeData(outputData);
         return true;
 
-
-
     }
 
+    public Channel getInbound() {
+        return inbound;
+    }
 
+    public Channel getOutbound() {
+        return outbound;
+    }
 }
